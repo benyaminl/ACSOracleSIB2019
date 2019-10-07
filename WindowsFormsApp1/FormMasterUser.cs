@@ -29,12 +29,22 @@ namespace WindowsFormsApp1
                 MessageBox.Show(data.msg);
             } else
             {
-                foreach(string[] d in data.data)
+                foreach(Object[] d in data.data)
                 {
-                    dgvUser.Rows.Add(d);
+                    Object[] dd = new Object[d.Length + 1];
+                    d.CopyTo(dd, 0);
+                    dd[d.Length] = "Detail";
+                    dgvUser.Rows.Add(dd);
                 }
             }
-            
+        }
+
+        private void dgvUser_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 2)
+            {
+                MessageBox.Show("Klik! - " + dgvUser.Rows[e.RowIndex].Cells[0].Value);
+            }
         }
     }
 }

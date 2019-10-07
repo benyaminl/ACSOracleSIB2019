@@ -88,6 +88,7 @@
             this.dgvUser.ReadOnly = true;
             this.dgvUser.Size = new System.Drawing.Size(409, 221);
             this.dgvUser.TabIndex = 4;
+            this.dgvUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUser_CellClick);
             // 
             // username
             // 
@@ -106,6 +107,7 @@
             this.Detail.HeaderText = "Detail";
             this.Detail.Name = "Detail";
             this.Detail.ReadOnly = true;
+            this.Detail.Text = "Detail";
             // 
             // FormMasterUser
             // 

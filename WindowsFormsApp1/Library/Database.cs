@@ -84,12 +84,12 @@ namespace WindowsFormsApp1.Library
         /// <param name="query">The normal query, but should be using :abc for prepared statement eg : select * from user where user like :user</param>
         /// <param name="parameter">Parameter for prepared statement</param>
         /// <returns>Tuple of data msg and status </returns>
-        public static (bool status, List<String[]> data, string msg) executeQuery(string query, Dictionary<string,Object> parameter = null)
+        public static (bool status, List<Object[]> data, string msg) executeQuery(string query, Dictionary<string,Object> parameter = null)
         {
 
             bool status;
             string msg = "";
-            List<String[]> data = new List<String[]> { };
+            List<Object[]> data = new List<Object[]> { };
 
             try {
                 connection.Open();
@@ -111,10 +111,10 @@ namespace WindowsFormsApp1.Library
 
                 while(dr.Read())
                 {
-                    string[] temp = new string[dr.FieldCount];
+                    Object[] temp = new Object[dr.FieldCount];
                     for(int i = 0; i < dr.FieldCount; i++)
                     {
-                        temp[i] = dr.GetValue(i).ToString();
+                        temp[i] = dr.GetValue(i);
                     }
                     data.Add(temp);
                 }
