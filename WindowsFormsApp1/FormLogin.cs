@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             
-            String[] data = UserModel.get();
+            //String[] data = UserModel.get();
             //MessageBox.Show("Halo!");
         }
 
@@ -36,7 +36,9 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show(hasil.msg);
             }
-            
+
+            var form = new FormMasterUser();
+            form.Show();
         }
     }
 }

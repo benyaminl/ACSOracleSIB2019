@@ -46,6 +46,7 @@ namespace WindowsFormsApp1.Library
                 connection.Open();
                 msg = "Berhasil Koneksi!";
                 status = true;
+                connection.Close();
             } catch(OracleException e) {
                 msg = "Connection failed!\n" + e.Message;
             }
@@ -75,6 +76,57 @@ namespace WindowsFormsApp1.Library
             hostname = "localhost";
             db = "XE"; // Always XE kalau Express
             return connect(hostname, db, user, password);
+        }
+
+        /// <summary>
+        /// Execute query return list of string, as the index. 
+        /// </summary>
+        /// <param name="query">The normal query, but should be using :abc for prepared statement eg : select * from user where user like :user</param>
+        /// <param name="parameter">Parameter for prepared statement</param>
+        /// <returns>Tuple of data msg and status </returns>
+        public static (bool status, List<String[]> data, string msg) executeQuery(string query, Dictionary<string,Object> parameter = null)
+        {
+
+            bool status;
+            string msg = "";
+            List<String[]> data = new List<String[]> { };
+
+            try {
+                connection.Open();
+                OracleCommand oc = new OracleCommand(query, connection);
+                
+                // Check apakah ada prepared statement dilempar?
+                if (parameter != null)
+                {   // Jika ada maka
+                    // @see https://www.devart.com/dotconnect/oracle/articles/parameters.html
+                    // @see https://stackoverflow.com/a/11048965/4906348
+                    // @see https://docs.microsoft.com/en-us/dotnet/api/system.data.oracleclient.oraclecommand.parameters?redirectedfrom=MSDN&view=netframework-4.8#System_Data_OracleClient_OracleCommand_Parameters
+                    oc.Prepare();
+                    foreach (string key in parameter.Keys)
+                    {
+                        oc.Parameters.Add(key, parameter[key]);
+                    }
+                }
+                OracleDataReader dr = oc.ExecuteReader();
+
+                while(dr.Read())
+                {
+                    string[] temp = new string[dr.FieldCount];
+                    for(int i = 0; i < dr.FieldCount; i++)
+                    {
+                        temp[i] = dr.GetValue(i).ToString();
+                    }
+                    data.Add(temp);
+                }
+
+                status = true;
+            } catch(OracleException e)
+            {
+                status = false;
+                msg = e.Message;
+            }
+
+            return (status,data, msg);
         }
     }
 }

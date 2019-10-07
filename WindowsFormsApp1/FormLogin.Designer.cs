@@ -53,6 +53,7 @@
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(172, 26);
             this.txtUser.TabIndex = 1;
+            this.txtUser.Text = "POS";
             // 
             // label2
             // 
@@ -81,6 +82,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(172, 26);
             this.txtPassword.TabIndex = 3;
+            this.txtPassword.Text = "POS";
             // 
             // btnLogin
             // 

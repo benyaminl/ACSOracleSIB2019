@@ -8,9 +8,12 @@ namespace WindowsFormsApp1.Models
 {
     class UserModel
     {
-        public static String[] get()
+        public static List<(string user, string roles)> get()
         {
-            return new string[5] {"1","2","3","4","5" };
+            List<(string, string)> data = new List<(string, string)> { };
+            string query = "SELECT * FROM ALL_USERS";
+
+            return data;
         }
     }
 }
