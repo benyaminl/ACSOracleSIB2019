@@ -36,6 +36,7 @@
             this.username = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Detail = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,6 +74,7 @@
             this.btnCari.TabIndex = 3;
             this.btnCari.Text = "Cari";
             this.btnCari.UseVisualStyleBackColor = true;
+            this.btnCari.Click += new System.EventHandler(this.btnCari_Click);
             // 
             // dgvUser
             // 
@@ -109,17 +111,29 @@
             this.Detail.ReadOnly = true;
             this.Detail.Text = "Detail";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(345, 11);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Tambah";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormMasterUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(436, 308);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvUser);
             this.Controls.Add(this.btnCari);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormMasterUser";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormMasterUser";
             this.Load += new System.EventHandler(this.FormMasterUser_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).EndInit();
@@ -138,5 +152,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn username;
         private System.Windows.Forms.DataGridViewTextBoxColumn Role;
         private System.Windows.Forms.DataGridViewButtonColumn Detail;
+        private System.Windows.Forms.Button button1;
     }
 }

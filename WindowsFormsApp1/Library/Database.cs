@@ -125,8 +125,43 @@ namespace WindowsFormsApp1.Library
                 status = false;
                 msg = e.Message;
             }
-
+            connection.Close();
             return (status,data, msg);
+        }
+
+        public static (bool status, string msg) executeNonQuery(string query, Dictionary<string, Object> parameter = null)
+        {
+            bool status = false;
+            string msg = "";
+            try
+            {
+                connection.Open();
+                OracleCommand oc = new OracleCommand(query, connection);
+
+                // Check apakah ada prepared statement dilempar?
+                if (parameter != null)
+                {   // Jika ada maka
+                    // @see https://www.devart.com/dotconnect/oracle/articles/parameters.html
+                    // @see https://stackoverflow.com/a/11048965/4906348
+                    // @see https://docs.microsoft.com/en-us/dotnet/api/system.data.oracleclient.oraclecommand.parameters?redirectedfrom=MSDN&view=netframework-4.8#System_Data_OracleClient_OracleCommand_Parameters
+                    oc.Prepare();
+                    foreach (string key in parameter.Keys)
+                    {
+                        oc.Parameters.Add(key, parameter[key]);
+                    }
+                }
+
+                int statusTemp = oc.ExecuteNonQuery();
+                // One line if
+                status = (statusTemp < 0) ? false : true;
+            }
+            catch (OracleException e)
+            {
+                status = false;
+                msg = e.Message;
+            }
+            connection.Close();
+            return (status, msg);
         }
     }
 }

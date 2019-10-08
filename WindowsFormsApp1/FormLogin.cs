@@ -38,7 +38,7 @@ namespace WindowsFormsApp1
             }
 
             var form = new FormMasterUser();
-            form.Show();
+            form.ShowDialog();
         }
     }
 }
